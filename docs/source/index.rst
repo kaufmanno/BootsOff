@@ -31,7 +31,7 @@ Documentation
 About
 """""
 
-NoBootsOn is {...}.
+NoBootsOn is a collection of Tools for geophysical survey preparation, data processing and interpretation and reporting.
 
 * {@@@ Include main descriptors of NoBootsOn here}
 * {@@@ For example what it does}
