@@ -1,0 +1,6 @@
+digraph "packages_uml_core" {
+charset="utf-8"
+rankdir=BT
+"0" [label="core", shape="box"];
+"1" [label="core.core", shape="box"];
+}
