@@ -2,5 +2,7 @@ digraph "packages_uml_core" {
 charset="utf-8"
 rankdir=BT
 "0" [label="core", shape="box"];
-"1" [label="core.core", shape="box"];
+"1" [label="core.campaign", shape="box"];
+"2" [label="core.campaign.survey", shape="box"];
+"3" [label="core.core", shape="box"];
 }
