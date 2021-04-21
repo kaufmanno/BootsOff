@@ -17,6 +17,12 @@ sphinx-gallery = "*"
 nbsphinx = "*"
 pylint = "*"
 pytest = "*"
+shapely = "*"
+geopandas = "*"
+rasterio = "*"
+pyvista = "*"
+scipy = "*"
+descartes = "*"
 
 [requires]
 python_version = "3.8"

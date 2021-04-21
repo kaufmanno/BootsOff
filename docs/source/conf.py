@@ -128,7 +128,7 @@ html_theme_options = {
 
 # -- Options for HTMLHelp output ---------------------------------------------
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'GSDMA docs'
+htmlhelp_basename = 'NoBootsOn docs'
 
 # -- Options for LaTeX output ------------------------------------------------
 
