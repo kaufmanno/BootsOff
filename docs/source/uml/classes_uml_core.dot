@@ -1,5 +1,5 @@
 digraph "classes_uml_core" {
 charset="utf-8"
 rankdir=BT
-"0" [label="{FakeClass|name : NoneType, str\l|display(text)\l}", shape="record"];
+"0" [label="{FakeClass|name : str, NoneType\l|display(text)\l}", shape="record"];
 }
