@@ -1,4 +1,4 @@
-.. NoBootsOn documentation master file.
+.. BootsOff documentation master file.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
@@ -7,15 +7,15 @@ Documentation
 .. raw:: html
 
     <div class="banner">
-        <h2>{@@@ A relevant title giving a short description of the purpose of NoBootsOn} </h2>
-        <a href="./examples/index.html"><img src="_static/banner_small.png" alt="NoBootsOn" width="100%"/></a>
+        <h2>{@@@ A relevant title giving a short description of the purpose of BootsOff} </h2>
+        <a href="./examples/index.html"><img src="_static/banner_small.png" alt="BootsOff" width="100%"/></a>
     </div>
 
 .. |GPLv3| image:: https://img.shields.io/badge/License-GPLv3-blue.svg
    :target: https://www.gnu.org/licenses/gpl-3.0
 
-.. |rtd| image:: https://readthedocs.org/projects/nobootson/badge/?version=latest
-   :target: https://nobootson.readthedocs.io/en/latest/?badge=latest
+.. |rtd| image:: https://readthedocs.org/projects/BootsOff/badge/?version=latest
+   :target: https://BootsOff.readthedocs.io/en/latest/?badge=latest
    :alt: Documentation Status
 
 
@@ -31,14 +31,14 @@ Documentation
 About
 """""
 
-NoBootsOn is a collection of Tools for geophysical survey preparation, data processing and interpretation and reporting.
+BootsOff is a collection of Tools for geophysical survey preparation, data processing and interpretation and reporting.
 
-* {@@@ Include main descriptors of NoBootsOn here}
+* {@@@ Include main descriptors of BootsOff here}
 * {@@@ For example what it does}
 * {@@@ Based on which principles}
 * {@@@ And for with kind of applications}
 
-NoBootsOn is {...} that {...}.
+BootsOff is {...} that {...}.
 This package provides a Pythonic, well-documented interface exposing
 {...} to facilitate {...}.
 
