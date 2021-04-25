@@ -31,7 +31,7 @@ Documentation
 About
 """""
 
-BootsOff is a collection of Tools for geophysical survey preparation, data processing and interpretation and reporting.
+BootsOff is a collection of Tools for geophysical survey preparation, data processing, interpretation and reporting.
 
 * {@@@ Include main descriptors of BootsOff here}
 * {@@@ For example what it does}
