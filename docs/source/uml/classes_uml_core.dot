@@ -1,5 +1,0 @@
-digraph "classes_uml_core" {
-charset="utf-8"
-rankdir=BT
-"0" [label="{Station|label\l|display(text)\lplot()\l}", shape="record"];
-}
