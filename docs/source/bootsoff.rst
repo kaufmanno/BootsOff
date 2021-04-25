@@ -4,10 +4,18 @@ bootsoff package
 Submodules
 ----------
 
-bootsoff.topo module
+Bootsoff.core module
 --------------------
 
-.. automodule:: bootsoff.topo
+.. automodule:: bootsoff.topo.topo
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+bootsoff.topo.topo module
+-------------------------
+
+.. automodule:: bootsoff.topo.topo
    :members:
    :undoc-members:
    :show-inheritance:
