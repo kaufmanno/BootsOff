@@ -7,7 +7,7 @@ To clone the repository and setup the environment for using this project
 .. code-block:: bash
 
    $ git clone git@github.com:kaufmanno/BootsOff.git
-   $ cd BootsOff/
+   $ cd bootsoff/
    $ pipenv shell
    $ pipenv install
 

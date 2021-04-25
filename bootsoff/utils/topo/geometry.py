@@ -8,10 +8,10 @@ from descartes import PolygonPatch
 def plot_shapely_obj(ax=None, obj=None, **kwargs):
     if ax is None:
         fig, ax = plt.subplots()
-    if type(obj) in (Point, LineString):
+    if isinstance(obj,Point) or isinstance(obj, LineString):
         x, y = obj.xy
         ax.plot(x, y, **kwargs)
-    elif type(obj) is Polygon:
+    elif isinstance(obj, Polygon):
         patch = PolygonPatch(obj, **kwargs)
         ax.add_patch(patch)
     else:

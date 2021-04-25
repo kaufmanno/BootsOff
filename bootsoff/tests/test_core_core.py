@@ -1,5 +1,5 @@
 import unittest
-from core import core
+from bootsoff.core import core
 
 
 class CoreTestCase(unittest.TestCase):
