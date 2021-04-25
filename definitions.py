@@ -1,5 +1,10 @@
-import os
+from pathlib import Path
 
-ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
-VERSION = u'0.1'
-RELEASE = VERSION + u'.0a'
+PROJECT = u'BootsOff'
+AUTHOR = u'O. KAUFMANN'
+VERSION = u'0.2'
+RELEASE = VERSION + u'.1a'
+LICENSE = u'GPLv3'
+SHORT_DESCRIPTION = ''
+ROOT_DIR = str(Path(__file__).parent.absolute())
+URL = f'https://github.com/kaufmanno/{PROJECT}'

@@ -8,7 +8,7 @@ from descartes import PolygonPatch
 def plot_shapely_obj(ax=None, obj=None, **kwargs):
     if ax is None:
         fig, ax = plt.subplots()
-    if isinstance(obj,Point) or isinstance(obj, LineString):
+    if isinstance(obj, Point) or isinstance(obj, LineString):
         x, y = obj.xy
         ax.plot(x, y, **kwargs)
     elif isinstance(obj, Polygon):
@@ -47,20 +47,23 @@ def transform_matrix_2d(from_obj, to_obj, shapely_format=False):
     a = sf * ct
     b = -sf * st
     c = 0.
+    # noinspection SpellCheckingInspection
     xoff = t1x * sf * ct - t1y * sf * st + t2x
     d = sf * st
     e = sf * ct
     f = 0.
+    # noinspection SpellCheckingInspection
     yoff = t1x * sf * st + t1y * sf * ct + t2y
     g = 0.
     h = 0.
     i = 1.
+    # noinspection SpellCheckingInspection
     zoff = 0.
 
     if shapely_format:
-        return [a,b,c,d,e,f,g,h,i,xoff,yoff,zoff]
+        return [a, b, c, d, e, f, g, h, i, xoff, yoff, zoff]
     else:
-        return np.array([[a,b,c,xoff], [d,e,f,yoff], [g,h,i,zoff], [0.,0.,0.,1.]])
+        return np.array([[a, b, c, xoff], [d, e, f, yoff], [g, h, i, zoff], [0., 0., 0., 1.]])
 
 
 def plot_profile(ax=None, obj=None, name=''):
@@ -85,7 +88,7 @@ def transform_vtk(transform_matrix, infile, outfile=None):
 
     # TODO: if a 3x3 matrix is passed convert it to a (4x4) transform matrix with rotation on the z-axis
     #  and translations along the x and y-axis
-    if np.shape(transform_matrix) == (4,4):
+    if np.shape(transform_matrix) == (4, 4):
         vtk_obj = pv.read(infile)
         vtk_obj.transform(transform_matrix)
         if outfile is None:

@@ -6,7 +6,7 @@ s = None
 with open('./uml_diagrams_in_docs.txt', 'r') as f:
     while not (s == ''):
         s = f.readline().strip('\n')
-        if not(s == '' or s == ' '):
+        if not (s == '' or s == ' '):
             uml_diagrams.append(s)
 print(uml_diagrams)
 
@@ -42,14 +42,13 @@ if len(uml_diagrams) > 0:
                 with open(f'../docs/source/uml/classes_uml_{d}.rst', 'w+') as uml_rst:
                     title = f'Classes {d}\n'
                     uml_rst.write(title)
-                    uml_rst.write('='*len(title)+'\n\n')
+                    uml_rst.write('=' * len(title) + '\n\n')
                     uml_rst.write(f'.. graphviz:: classes_uml_{d}.dot')
 
         rst.write('\n')
         rst.write('.. toctree::\n')
         rst.write('   :maxdepth: 1\n')
         rst.write('   :caption: Packages\n\n')
-
 
         for d in sorted(uml_diagrams):
             if os.path.exists(f'./packages_uml_{d}.dot'):
@@ -61,7 +60,7 @@ if len(uml_diagrams) > 0:
                 with open(f'../docs/source/uml/packages_uml_{d}.rst', 'w+') as uml_rst:
                     title = f'Packages {d}\n'
                     uml_rst.write(title)
-                    uml_rst.write('='*len(title)+'\n\n')
+                    uml_rst.write('=' * len(title) + '\n\n')
                     uml_rst.write(f'.. graphviz:: packages_uml_{d}.dot')
 
 

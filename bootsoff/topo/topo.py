@@ -3,48 +3,77 @@ from scipy.interpolate import PPoly, PchipInterpolator
 from scipy.integrate import quad
 from scipy.optimize import root
 
-def cclength(coefs, x_end=1.0):
-    """ computes the length along a cubic curve defined by the coefficients of its equation z=f(x) from 0 to x_end
 
-    :param coefs: coefficients of the cubic curve
-    :type coefs: list
-    :param x_end: length is computed for a portion of the curve whose ends are at x=0 and x=x_end
-    :return: length the portion of the curve
-    :rtype: float
+def cclength(coefs, x_end=1.0):
+    """
+    Computes the length along a cubic curve defined by the coefficients of its equation z=f(x) from 0 to x_end
+
+    Parameters
+    ----------
+    coefs: list
+           coefficients of the cubic curve
+
+    x_end: float
+           length is computed for a portion of the curve whose ends are at x=0 and x=x_end
+
+    Returns
+    -------
+    length: float
+            length the portion of the curve
     """
     # g = lambda x: (1 + (coefs[2] + 2 * coefs[1] * (x) + 3 * coefs[0] * (x) ** 2) ** 2) ** 0.5
-    def g(x): return (1 + (coefs[2] + 2 * coefs[1] * x + 3 * coefs[0] * x ** 2) ** 2) ** 0.5
+    def g(x):
+        return (1 + (coefs[2] + 2 * coefs[1] * x + 3 * coefs[0] * x ** 2) ** 2) ** 0.5
+
     length = quad(g, 0, x_end, epsrel=0.001)
+
     return length[0]
 
 
 def cclength2abs(coefs, length):
-    """ computes the x value of the point at a distance computed along a cubic curve defined by its coefficients
+    """
+    Computes the x value of the point at a distance computed along a cubic curve defined by its coefficients
 
-    :param coefs: coefficients of the cubic curve
-    :type coefs: list
-    :param length: length of the portion of the curve
-    :type length: float
-    :return: x value of the end point of the portion of the curve starting at x=0 and of given length
-    :rtype: float
+    Parameters
+    ----------
+
+    coefs: list
+           coefficients of the cubic curve
+
+    length: numpy.array
+           length of the portion of the curve
+
+    Returns
+    -------
+        x: float
+           value of the end point of the portion of the curve starting at x=0 and of given length
+
     """
 
-    def f(x): return length - cclength(coefs, x)
+    def f(x):
+        return length - cclength(coefs, x)
 
     x = root(f, length)
     return x.x
 
 
 def cclength2xz(known_points, distances):
-    """ computes [x,z] of points distributed at set distances along a curve defined by a set of known points
+    """
+    Computes [x,z] of points distributed at set distances along a curve defined by a set of known points
     and interpolated as a pchip
 
-    :param known_points: points
-    :type known_points: list, numpy.array
-    :param distances: distances from the origin of the curve to the points whose x_value are sought
-    :type distances: numpy.array
-    :return: list of found points coordinates along the curve
-    :rtype: numpy.array
+    Parameters
+    ----------
+    known_points: list, numpy.array
+                  points
+
+    distances: numpy.array
+               distances from the origin of the curve to the points whose x_value are sought
+
+    Returns
+    -------
+    xz: numpy.array
+             list of found points coordinates along the curve
     """
     if type(known_points) is list:
         known_points = np.array(known_points).T

@@ -1,7 +1,7 @@
 # BootsOff  
 ### O. KAUFMANN, 2021.  
   
-@@@ please inster a one line description of BootsOff.
+BootsOff brings together tools for the preparation and processing of geophysical data.
 
 [![Documentation](https://readthedocs.org/projects/bootsoff/badge/?version=latest)](https://bootsoff.readthedocs.io/en/latest/?badge=latest
 )
@@ -19,7 +19,8 @@
 
 ## Description of the project <a name="Description-of-the-project"></a>
 
-@@@ Please insert a project description here!  
+BootsOff brings together tools for the preparation and processing of geophysical data. These tools rely on classes that 
+describe common acquisition patterns. 
 
 ## Prerequisites <a name="Prerequisites"></a>
 

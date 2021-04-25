@@ -23,6 +23,9 @@ rasterio = "*"
 pyvista = "*"
 scipy = "*"
 descartes = "*"
+svgpath2mpl = "*"
+svgwrite = "*"
+svgpathtools = "*"
 
 [requires]
 python_version = "3.8"

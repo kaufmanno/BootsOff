@@ -1,5 +1,5 @@
 CWD="${PWD}"
-TSD="$CWD/tests"
+TSD="$CWD/bootsoff/tests"
 
 cd "$TSD"
 shopt -s nullglob

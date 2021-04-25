@@ -1,6 +1,6 @@
 from shapely.geometry import Point
-from bootsoff.utils.topo import geometry
-from bootsoff.utils.topo import symbols
+from bootsoff.topo import geometry
+from bootsoff.utils.symbols import symbols
 
 
 class Station(Point):
@@ -29,10 +29,11 @@ class Station(Point):
         if label is None:
             label = ''
         self._label = label
+        self._marker = symbols['station']
 
     @property
     def label(self):
-        return self._name
+        return self._label
 
     @label.setter
     def label(self, value):
@@ -42,23 +43,21 @@ class Station(Point):
             self._label = value
 
     def plot(self, **kwargs):
-        marker = symbols.symbols['station']
-        geometry.plot_shapely_obj(obj=self, **kwargs)
-
-    def display(self, text=None):
         """
-        Displays a text or name attribute if text is None
-        
+        Plots a marker at the station coordinates
+
         Parameters
         -----------
-        text : str
-            if None, displays name (default=None)
+        **kwargs : dict
+            kwargs to pass to plot_shapely_obj()
         """
-        
-        if text is None:
-            print(self.name)
-        else:
-            print(text)
+        show_label = kwargs.pop('show_label', False)
+        defaults = {'marker': self._marker, 'markerfacecolor': (0.,0.,0.,0.), 'markeredgecolor': (0.,0.,0.,.5),
+                    'linestyle': 'None'}
+        for k, v in defaults.items():
+            if k not in kwargs.keys():
+                kwargs.update({k: v})
+        geometry.plot_shapely_obj(obj=self, **kwargs)
 
 
 def fake_function(text='Hello World!'):
@@ -67,7 +66,7 @@ def fake_function(text='Hello World!'):
     
     Parameters
     ----------
-    name : str
+    text : str
               
     Returns
     -------
