@@ -5,3 +5,4 @@ BootsOff modules
    :maxdepth: 2
 
    core
+   utils
