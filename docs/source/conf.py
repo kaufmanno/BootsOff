@@ -14,7 +14,7 @@
 #
 import os
 import sys
-from definitions import VERSION, RELEASE
+from .definitions import VERSION, RELEASE
 
 sys.path.insert(0, os.path.abspath('../../bootsoff'))
 # print(f'System path: {sys.path}')
