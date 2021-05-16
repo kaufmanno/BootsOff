@@ -7,7 +7,7 @@ Documentation
 .. raw:: html
 
     <div class="banner">
-        <h2>{@@@ A relevant title giving a short description of the purpose of BootsOff} </h2>
+        <h2>BootsOff is a collection of Tools for geophysical survey preparation, data processing, interpretation and reporting.</h2>
         <a href="./examples/index.html"><img src="_static/banner_small.png" alt="BootsOff" width="100%"/></a>
     </div>
 
