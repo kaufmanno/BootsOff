@@ -13,10 +13,28 @@ Bootsoff.core module
    :show-inheritance:
 
 
-bootsoff.topo.topo module
+Bootsoff.gravity module
+--------------------
+
+.. automodule:: bootsoff.gravity
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+bootsoff.topo module
 -------------------------
 
-.. automodule:: bootsoff.topo.topo
+.. automodule:: bootsoff.topo
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+bootsoff.utils module
+-------------------------
+
+.. automodule:: bootsoff.utils
    :members:
    :undoc-members:
    :show-inheritance:
