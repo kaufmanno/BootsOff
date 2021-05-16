@@ -1,13 +1,11 @@
 CWD="${PWD}"
-TSD="$CWD/bootsoff/tests"
+TSD="$CWD/tests"
 
-cd "$TSD"
+cd "$TSD" || exit 1
 shopt -s nullglob
 
 Files=(test_*.py)
 
 pytest ${Files[@]}
 
-cd "$CWD"
-
-
+cd "$CWD" || exit 1
