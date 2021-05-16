@@ -7,7 +7,7 @@ Submodules
 Bootsoff.core module
 --------------------
 
-.. automodule:: bootsoff.topo.topo
+.. automodule:: bootsoff.core
    :members:
    :undoc-members:
    :show-inheritance:
