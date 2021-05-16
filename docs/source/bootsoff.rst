@@ -40,10 +40,11 @@ bootsoff.topo module
    :undoc-members:
    :show-inheritance:
 
+
 bootsoff.utils module
 ---------------------
 
-.. automodule:: bootsoff.utils
+.. automodule:: bootsoff.utils.ordered
    :members:
    :undoc-members:
    :show-inheritance:
