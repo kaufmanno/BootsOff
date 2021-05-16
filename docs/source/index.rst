@@ -7,7 +7,7 @@ Documentation
 .. raw:: html
 
     <div class="banner">
-        <h2>BootsOff is a collection of Tools for geophysical survey preparation, data processing, interpretation and reporting.</h2>
+        <h2>BootsOff is a collection of tools for geophysical survey preparation, data processing, interpretation and reporting.</h2>
         <a href="./examples/index.html"><img src="_static/banner_small.png" alt="BootsOff" width="100%"/></a>
     </div>
 
@@ -31,7 +31,8 @@ Documentation
 About
 """""
 
-BootsOff is a collection of Tools for geophysical survey preparation, data processing, interpretation and reporting.
+BootsOff is a collection of tools for geophysical survey preparation, data processing, interpretation and reporting.
+It is still in a very early stage and many features are expected to evolve.
 
 * {@@@ Include main descriptors of BootsOff here}
 * {@@@ For example what it does}
