@@ -38,7 +38,7 @@ def svg_to_marker(filename, x_reduce=np.mean, y_reduce=np.mean, x_flip=False, y_
         y_flip = -1
     else:
         y_flip = 1
-    print(f'filename: {filename}, type: {type(filename)}')
+    # print(f'filename: {filename}, type: {type(filename)}')
     svg = svg2paths(filename)
 
     # noinspection SpellCheckingInspection
@@ -54,6 +54,6 @@ def svg_to_marker(filename, x_reduce=np.mean, y_reduce=np.mean, x_flip=False, y_
 
 SYM_DIR = (plPath(__file__).parent.absolute() / 'svg_symbols').resolve()
 
-print(SYM_DIR / 'station.svg')
+# print(SYM_DIR / 'station.svg')
 
 symbols = {'station': svg_to_marker(str(SYM_DIR / 'station.svg'))}

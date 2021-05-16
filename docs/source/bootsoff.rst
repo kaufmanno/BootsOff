@@ -14,7 +14,7 @@ Bootsoff.core module
 
 
 Bootsoff.gravity module
---------------------
+-----------------------
 
 .. automodule:: bootsoff.gravity
    :members:
@@ -23,16 +23,25 @@ Bootsoff.gravity module
 
 
 bootsoff.topo module
--------------------------
+--------------------
 
-.. automodule:: bootsoff.topo
+.. automodule:: bootsoff.topo.topo
    :members:
    :undoc-members:
    :show-inheritance:
 
+.. automodule:: bootsoff.topo.geometry
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. automodule:: bootsoff.topo.coordinates
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
 bootsoff.utils module
--------------------------
+---------------------
 
 .. automodule:: bootsoff.utils
    :members:

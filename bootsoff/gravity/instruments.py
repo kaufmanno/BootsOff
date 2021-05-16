@@ -1,7 +1,7 @@
 import pandas as pd
 
 
-def import_cg6(filename, **kwargs):
+def import_cg6(filename, **kwargs) -> pd.DataFrame:
     """ Import data from CG6
     TODO: The GNSS file should first be merged with the CG-6 File"""
 
@@ -19,10 +19,12 @@ def import_cg6(filename, **kwargs):
     df['CorrTideCode'] = (df['Corrections[drift-temp-na-tide-tilt]'] % 100) // 10
     df['CorrTiltCode'] = df['Corrections[drift-temp-na-tide-tilt]'] % 10
 
-    df['InstrCorrGrav'] = df['RawGrav'] + corrections['TempCorr'] * df['CorrTempCode']*df['TempCorr'] \
-                          + corrections['DriftCorr'] * df['CorrDriftCode'] * df['DriftCorr'] \
-                          + corrections['TideCorr'] * df['CorrTideCode'] * df['TideCorr'] \
-                          + corrections['TiltCorr'] * df['CorrTiltCode'] * df['TiltCorr'] # NOTE: There are no NaCorr column in the CG6-data
+    df['InstrCorrGrav'] = df['RawGrav'] + corrections['TempCorr'] * df['CorrTempCode'] * df['TempCorr'] \
+        + corrections['DriftCorr'] * df['CorrDriftCode'] * df['DriftCorr'] \
+        + corrections['TideCorr'] * df['CorrTideCode'] * df['TideCorr'] \
+        + corrections['TiltCorr'] * df['CorrTiltCode'] * df['TiltCorr']
+    # NOTE: There are no NaCorr column in the CG6-data
+
     df['datetime'] = pd.to_datetime(df['Date'] + ' ' + df['Time'], utc=True)
     df.drop('Unnamed: 0', axis=1, inplace=True)
     df.set_index('datetime', inplace=True)

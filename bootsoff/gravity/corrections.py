@@ -1,11 +1,11 @@
 import numpy as np
-from os.path import dirname
-from gravity.constants import G, RT
-from gravity.unit_conversions import *
+from os.path import dirname, join
+from bootsoff.gravity.constants import G, RT
+from bootsoff.gravity.unit_conversions import *
 from tidegravity import solve_longman_tide
 
-print(dirname(__file__) + '/bullard_table.txt')
-bullard_table = np.genfromtxt(dirname(__file__) + '/bullard_table.txt', delimiter='\t', skip_header=1)
+filename = join(dirname(__file__), 'bullard_table.txt')
+bullard_table = np.genfromtxt(filename, delimiter='\t', skip_header=1)
 
 
 def bullard(h):
@@ -112,6 +112,7 @@ def drift_correction(times, base_idx, field='value', method='slinear', from_unit
     """ Computes the drift correction at given times based on the evolution at a base station
         base_records
     """
+    # TODO: Check and improve this
     df_base = df.query('Station_ID == "%s"' % df.loc[base_idx, 'Station_ID']).copy()
     df_base['datetime'] = df_base.index
     df_base['timedelta'] = df_base['datetime'].diff()
@@ -135,6 +136,7 @@ def drift_correction(times, base_idx, field='value', method='slinear', from_unit
 
 def corrections(df, base_idx, rho=2670., units='mgal'):
     # TODO: vérifier si les corrections de dérive doivent être faites avant ces corrections ou après (importance pour la base?)
+
     e_etg = g_etg(df['Latitude'], units=units)
     df['LatCorr'] = g_etg(df.loc[base_idx, 'Latitude'])-e_etg
     e_atm = g_atm(df['Ellipsoid Height'], units=units)

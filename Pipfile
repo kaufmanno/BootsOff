@@ -26,6 +26,7 @@ descartes = "*"
 svgpath2mpl = "*"
 svgwrite = "*"
 svgpathtools = "*"
+tidegravity = "*"
 
 [requires]
 python_version = "3.8"

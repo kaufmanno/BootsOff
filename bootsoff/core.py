@@ -13,7 +13,7 @@ class Station(Point):
         
     """
     
-    def __init__(self, label=None, coords=(0,0,0)):
+    def __init__(self, label=None, coords=(0, 0, 0)):
         """
         Station class
         
@@ -48,11 +48,14 @@ class Station(Point):
 
         Parameters
         -----------
+        show_label: bool, default: False
+            Set true to show the station label when plotting the station
+
         **kwargs : dict
             kwargs to pass to plot_shapely_obj()
         """
-        show_label = kwargs.pop('show_label', False)
-        defaults = {'marker': self._marker, 'markerfacecolor': (0.,0.,0.,0.), 'markeredgecolor': (0.,0.,0.,.5),
+        show_label = kwargs.pop('show_label', False)  # TODO: Implement this
+        defaults = {'marker': self._marker, 'markerfacecolor': (0., 0., 0., 0.), 'markeredgecolor': (0., 0., 0., .5),
                     'linestyle': 'None'}
         for k, v in defaults.items():
             if k not in kwargs.keys():
@@ -77,4 +80,3 @@ def fake_function(text='Hello World!'):
     text = text.capitalize()
     print(text)
     return text
-
