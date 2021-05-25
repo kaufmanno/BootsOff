@@ -27,6 +27,8 @@ svgpath2mpl = "*"
 svgwrite = "*"
 svgpathtools = "*"
 tidegravity = "*"
+xlrd = "*"
+folium = "*"
 
 [requires]
 python_version = "3.8"

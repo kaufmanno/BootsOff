@@ -80,3 +80,20 @@ def fake_function(text='Hello World!'):
     text = text.capitalize()
     print(text)
     return text
+
+
+def plot_stations(stations):
+    """
+    Prints and returns a text after capitalizing
+
+    Parameters
+    ----------
+    stations : list
+
+    Returns
+    -------
+
+    """
+
+    text = text.capitalize()
+    print(text)
