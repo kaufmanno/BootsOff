@@ -1,6 +1,7 @@
 import numpy as np
 import folium
 
+
 def geojson_points_to_feature_group(gjsn, name='Unnamed feature group'):
     """ converts a geojson dictionary into a folium feature group
 

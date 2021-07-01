@@ -1,21 +1,37 @@
 import matplotlib.pyplot as plt
 import pyvista as pv
 import numpy as np
-from shapely.geometry import Point, LineString, Polygon
+from shapely.geometry import Point, LineString, LinearRing, Polygon
 from descartes import PolygonPatch
 
 
 def plot_shapely_obj(ax=None, obj=None, **kwargs):
+    """
+    Plots a shapely object in matplotlib axes
+    Parameters
+    ----------
+    ax : matplotlib.axes
+        axes in which the shapely object should be plotted
+    obj : shapely.geometry
+        a shapely object to plot
+    kwargs : dict
+        keywords and arguments to pass to matplotlib plot for Points, LineStrings or LinearStrings and to patches for
+        polygons
+
+    Returns
+    -------
+       the matplotlib axes object used to plot the shapely object
+    """
     if ax is None:
         fig, ax = plt.subplots()
-    if isinstance(obj, Point) or isinstance(obj, LineString):
+    if isinstance(obj, Point) or isinstance(obj, LineString) or isinstance(obj, LinearRing):
         x, y = obj.xy
         ax.plot(x, y, **kwargs)
     elif isinstance(obj, Polygon):
         patch = PolygonPatch(obj, **kwargs)
         ax.add_patch(patch)
     else:
-        print('Warning: Invalid object type')
+        print(f'Warning: Invalid object type - {obj} : {type(obj)}')
     return ax
 
 
