@@ -1,5 +1,4 @@
 digraph "classes_uml_bootsoff" {
 charset="utf-8"
 rankdir=BT
-"0" [label="{Station|label\l|plot()\l}", shape="record"];
 }

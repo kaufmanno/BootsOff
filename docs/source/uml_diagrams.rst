@@ -11,4 +11,3 @@ UML diagrams
    :maxdepth: 1
    :caption: Packages
 
-   Packages bootsoff<uml/packages_uml_bootsoff.rst>
