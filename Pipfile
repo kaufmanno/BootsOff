@@ -30,6 +30,7 @@ svgpathtools = "*"
 tidegravity = "*"
 xlrd = "*"
 folium = "*"
+opencv-python = "*"
 
 [requires]
 python_version = "3.8"
