@@ -5,6 +5,8 @@ verify_ssl = true
 
 [dev-packages]
 rpy2 = "*"
+scooby = "*"
+ipyvtklink = "*"
 
 [packages]
 ipykernel = "*"
@@ -31,6 +33,7 @@ tidegravity = "*"
 xlrd = "*"
 folium = "*"
 opencv-python = "*"
+ipygany = "*"
 
 [requires]
 python_version = "3.8"

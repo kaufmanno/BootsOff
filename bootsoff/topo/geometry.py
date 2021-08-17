@@ -8,16 +8,16 @@ import itertools
 
 
 def plot_shapely_obj(obj=None, ax=None, **kwargs):
-    """
-    Plots a shapely object in matplotlib axes
+    """ Plots a shapely object in matplotlib axes
+
     Parameters
     ----------
     obj : shapely.geometry
-        a shapely object to plot
+        A shapely object to plot
     ax : matplotlib.axes
-        axes in which the shapely object should be plotted
+        Axes in which the shapely object should be plotted
     kwargs : dict
-        keywords and arguments to pass to matplotlib plot for Point, MultiPoint, LineString, MultiLineString or
+        Keywords and arguments to pass to matplotlib plot for Point, MultiPoint, LineString, MultiLineString or
         LinearStrings and to patches for polygons
 
     Returns
@@ -42,8 +42,7 @@ def plot_shapely_obj(obj=None, ax=None, **kwargs):
 
 
 def flatten_geometry(obj):
-    """
-    Takes a 3D geometry and returns a 2D geometry discarding the third coordinate
+    """ Takes a 3D geometry and returns a 2D geometry discarding the third coordinate
 
     Parameters
     ----------
@@ -54,14 +53,89 @@ def flatten_geometry(obj):
     -------
     shapely.geometry
         A 2D geometry
-        
     """
     return shapely.wkb.loads(shapely.wkb.dumps(obj, output_dimension=2))
+
+
+def lift(obj, elevation=0.):
+    """ Takes a geometry and turns it in a 3D geometry with given constant elevation
+
+    Parameters
+    ----------
+    obj : shapely.geometry
+        A geometry
+    elevation : float
+        elevation to which obj will be raised
+    Returns
+    -------
+    shapely.geometry
+        A 3D geometry
+    """
+    for idx, row in obj.iterrows():
+        g = row['geometry']
+        if g.geom_type == 'LineString' or g.geom_type == 'Point':
+            coords = [(i[0], i[1], elevation) for i in row['geometry'].coords]
+            obj.loc[idx, 'geometry'] = LineString(coords)
+        elif g.geom_type == 'Polygon':
+            # exterior ring
+            exterior = [(i[0], i[1], elevation) for i in g.exterior.coords]
+            # interior rings (a.k.a. holes)
+            interiors = [[(j[0], j[1], elevation) for j in i.coords] for i in g.interiors]
+            obj.loc[idx, 'geometry'] = Polygon(exterior, interiors)
+    # return obj  # not needed as operation is done inplace
+
+
+def rotate_around_vector(vector, angle, degrees=False, affine_4x4=False):
+    """Returns the matrix associated to a rotation by a given angle around a given vector using Rodrigues formula
+
+    Parameters
+    ----------
+    vector : numpy.array
+        vector around which the rotation matrix will be computed
+    angle : float
+        amplitude of rotation given following the right-hand-side rule
+    degrees : bool, default: False
+        set to True if angle is given in degrees rather than in radians
+    affine_4x4 : bool, default: False
+        set to True to return a 4x4 affine transform matrix
+
+    Returns
+    -------
+    numpy.array
+        transform matrix
+
+    Example
+    -------
+    This example shows how to use this function to rotate by 90° a given vector a around vector v.
+
+    >>> import numpy as np
+    >>> import bootsoff.topo.geometry as btg
+    >>> a = np.array([0., 0., 1.])
+    >>> v = np.array([3., 0., 0.])
+    >>> angle = np.pi/2
+    >>> r = btg.rotate_around_vector(v, angle)
+    >>> np.dot(r, a)
+    array([ 0.00000000e+00, -1.00000000e+00,  1.11022302e-16])
+
+    For more info. see https://en.wikipedia.org/wiki/Rodrigues'_rotation_formula#Matrix_notation"""
+    
+    vector = np.array(vector)  # convert array-like (list, tuple) into a numpy array
+    vector = vector/np.linalg.norm(vector) # normalize the vector
+    if degrees:
+        # convert degrees to radians
+        angle = angle * np.pi /180
+    c = np.array([[0., -vector[2], vector[1]],[vector[2], 0., -vector[0]],[-vector[1], vector[0], 0.]])
+    r = np.eye(3) + c * np.sin(angle) + np.matmul(c,c) * (1 - np.cos(angle))
+    if affine_4x4:
+        r = np.vstack([r,np.array([0., 0., 0.])])
+        r = np.hstack([r, np.array([[0., 0., 0., 1.]]).T])
+    return r
 
 
 def transform_matrix_2d(from_obj, to_obj, shapely_format=False):
     # TODO: deal with more than two points in from_points and to_points using best fit ?
     # TODO: introduce skew?
+    # TODO: deprecate and reuse what was done for the 4x4 vtk matrix?
     if type(from_obj) is not tuple:
         f = (*from_obj.coords[0], *from_obj.coords[-1])
         f_length = from_obj.length
@@ -120,6 +194,32 @@ def plot_profile(ax=None, obj=None, name=''):
     return ax
 
 
+def vtk_transform_matrix_from_control_points(origin_coords, destination_coords, rcond=-1):
+    """ Computes a 4x4 transform matrix to use on vtk objects from control points
+
+    Parameters
+    ----------
+    origin_coords : numpy.array
+        3D coordinates of the control points in the origin space
+    destination_coords : numpy.array
+        3D coordinates of the control points in the destination space
+    rcond : float, default: -1
+        Cut-off ratio for small singular values used by numpy.linalg.lstsq
+
+    Returns
+    -------
+    matrix : numpy.array
+        The 4x4 transform matrix
+    residuals : numpy.array
+        The residuals of the least-squares fitting of the parameters of the transform from the control points coordinate
+         pairs
+    """
+    a = np.vstack([np.array(origin_coords).T, np.array([1., 1., 1., 1.])]).T
+    b = np.array(destination_coords)
+    transform_matrix, residuals, rank, singular = np.linalg.lstsq(a, b, rcond=rcond)
+    return np.vstack([transform_matrix.swapaxes(0, 1), np.array([0., 0., 0., 1.])]), residuals
+
+
 def transform_vtk(transform_matrix, infile, outfile=None):
     """ Transforms a vtk file using an affine transform in 3D defined by the transform matrix
 
@@ -127,16 +227,10 @@ def transform_vtk(transform_matrix, infile, outfile=None):
     ----------
     transform_matrix : numpy.array
         a 4x4 affine transform matrix
-
     infile: str or path
         filename of a vtk file to transform
-
     outfile: str or path
         filename of the transformed vtk file
-
-    Returns
-    -------
-
     """
 
     # TODO: if a 3x3 matrix is passed convert it to a (4x4) transform matrix with rotation on the z-axis
@@ -157,7 +251,7 @@ def gdf_to_ug(gdf, elevation='z'):
     Parameters
     ----------
     gdf : geopandas.GeoDataFrame
-        A geodataframe
+        A geodataframe with unique index values
 
     elevation : str
         Column name for the elevation field
@@ -166,21 +260,22 @@ def gdf_to_ug(gdf, elevation='z'):
     -------
     pv.core.pointset.UnstructuredGrid
         A pyvista unstructured grid containing Point, LineString and Polygon with associated data
-
     """
 
     points = []
     point_cells = []
     tubes = {}
     cell_data = []
-
+    k = 0
+    point_idx = 0
     # iterate over the rows
     for idx, row in gdf.iterrows():
         if isinstance(row.geometry, Point):
             x, y, z = row.geometry.x, row.geometry.y, row[elevation]
             points.append([x, y, z])
             cell_data.append(row[elevation])
-            point_cells.append([1, idx])
+            point_cells.append([1, point_idx])
+            point_idx += 1
 
         elif isinstance(row.geometry, LineString) or isinstance(row.geometry, Polygon):
             line_vertices = []
@@ -206,17 +301,18 @@ def gdf_to_ug(gdf, elevation='z'):
             unstructured_grid = pv.UnstructuredGrid(line_cells, np.array([4]), line_vertices)
             # we can add some values to the point
             unstructured_grid.cell_arrays['Elevation'] = row[elevation]
-            unstructured_grid.cell_arrays['Geometry'] = 4
-            tubes[str(idx)] = unstructured_grid
+            tubes[str(k)] = unstructured_grid
+            k += 1
 
-    # Create an unstructured grid object for all the points and associate data
-    unstructured_grid = pv.UnstructuredGrid(np.array(point_cells), np.array([1] * len(points)), np.array(points))
-    unstructured_grid.cell_arrays['Elevation'] = cell_data
-    unstructured_grid.cell_arrays['Geometry'] = [1] * len(points)
+    if len(points) > 0:
+        # Create an unstructured grid object for all the points and associate data
+        unstructured_grid = pv.UnstructuredGrid(np.array(point_cells), np.array([1] * len(points)), np.array(points))
+        unstructured_grid.cell_arrays['Elevation'] = cell_data
 
-    # Merge tubes created from lines and
-    tubes['points'] = unstructured_grid
-    # print(line_tubes)
+        # Merge tubes created from lines and
+        tubes[str(k)] = unstructured_grid
+
+    # print(tubes)
     blocks = pv.MultiBlock(tubes)
     unstructured_grid = blocks.combine()
 
