@@ -34,6 +34,7 @@ xlrd = "*"
 folium = "*"
 opencv-python = "*"
 ipygany = "*"
+prettymaps = "*"
 
 [requires]
 python_version = "3.8"

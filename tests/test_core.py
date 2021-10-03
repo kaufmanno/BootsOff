@@ -11,7 +11,7 @@ class CoreTestCase(unittest.TestCase):
         self.assertEqual(expected, actual)
 
     def test_station_class(self):
-        station = bootsoff.Station(label='test');
+        station = bootsoff.Station(label='test', crs='EPSG:4326');
         actual = station.label
         expected = 'test'
         self.assertEqual(expected, actual)
