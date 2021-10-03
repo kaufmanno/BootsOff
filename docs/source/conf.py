@@ -45,6 +45,7 @@ extensions = ['sphinx.ext.autodoc', 'sphinx.ext.napoleon', 'sphinx_rtd_theme', '
               'sphinx.ext.graphviz']
 
 nbsphinx_execute = 'always'
+nbsphinx_allow_errors = True  # Set to false before a release
 
 # Napoleon settings
 napoleon_google_docstring = False
