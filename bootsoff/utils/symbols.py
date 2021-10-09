@@ -56,4 +56,9 @@ SYM_DIR = (plPath(__file__).parent.absolute() / 'svg_symbols').resolve()
 
 # print(SYM_DIR / 'station.svg')
 
-symbols = {'station': svg_to_marker(str(SYM_DIR / 'station.svg'))}
+symbols = {'station': svg_to_marker(str(SYM_DIR / 'station.svg')),
+           'landmark': svg_to_marker(str(SYM_DIR / 'landmark.svg')),
+           'stake': svg_to_marker(str(SYM_DIR / 'stake.svg')),
+           'start': 'o',
+           'end': 's'
+           }
