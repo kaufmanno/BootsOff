@@ -35,6 +35,7 @@ folium = "*"
 opencv-python = "*"
 ipygany = "*"
 osmnx = "*"
+geometron = "*"
 
 [requires]
 python_version = "3.8"
