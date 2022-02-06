@@ -34,8 +34,11 @@ xlrd = "*"
 folium = "*"
 opencv-python = "*"
 ipygany = "*"
-osmnx = "*"
-geometron = "*"
+# osmnx = "*"
+geometron = ">=0.0.32"
 
 [requires]
 python_version = "3.8"
+
+[pipenv]
+allow_prereleases = true
