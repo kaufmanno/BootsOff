@@ -1,3 +1,5 @@
+# TODO : import and append symbols from geometron
+
 from pathlib import Path as plPath
 import numpy as np
 import matplotlib.path as mpath
